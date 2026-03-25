@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSG Survival OS</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f14;
+  color: #e6edf3;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #111;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid red;
+  z-index: 1000;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 16px;
+  color: #00ffcc;
+}
+
+.nav-buttons button {
+  margin: 2px;
+  padding: 8px;
+  background: #222;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-buttons button:hover {
+  background: red;
+}
+
+.container {
+  margin-top: 70px;
+  padding: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+button.action {
+  padding: 20px;
+  font-size: 16px;
+  background: #1c1f26;
+  border: 1px solid #333;
+  color: #fff;
+}
+
+button.action:hover {
+  background: red;
+}
+
+.panel {
+  margin-top: 20px;
+  padding: 10px;
+  background: #111;
+  border: 1px solid #333;
+}
+
+.step {
+  margin: 8px 0;
+  padding: 8px;
+  background: #1a1a1a;
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>BSG SURVIVAL OS</h1>
+  <div class="nav-buttons">
+    <button onclick="loadQuick()">Quick</button>
+    <button onclick="loadMedical()">Medical</button>
+    <button onclick="loadWater()">Water</button>
+    <button onclick="loadShelter()">Shelter</button>
+    <button onclick="loadSecurity()">Security</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <div id="main"></div>
+
+</div>
+
+<script>
+
+function loadQuick() {
+  document.getElementById('main').innerHTML = `
+    <h2>🚨 QUICK ACTION</h2>
+    <div class="grid">
+      <button class="action" onclick="lost()">I'M LOST</button>
+      <button class="action" onclick="water()">NO WATER</button>
+      <button class="action" onclick="injured()">INJURED</button>
+      <button class="action" onclick="threat()">UNDER THREAT</button>
+    </div>
+  `;
+}
+
+function lost() {
+  showSteps(["STOP movement","Stay calm","Find shelter","Signal for help","Ration energy"]);
+}
+
+function water() {
+  showSteps(["Search low ground","Look for vegetation","Collect rainwater","Boil or filter","Ration intake"]);
+}
+
+function injured() {
+  showSteps(["Stop bleeding","Apply pressure","Immobilize injury","Prevent shock","Seek help"]);
+}
+
+function threat() {
+  showSteps(["Avoid contact","Move quietly","Use cover","Change direction","Find safe zone"]);
+}
+
+function loadMedical() {
+  document.getElementById('main').innerHTML = `
+    <h2>🏥 MEDICAL</h2>
+    <div class="grid">
+      <button class="action" onclick="bleeding()">BLEEDING</button>
+      <button class="action" onclick="burns()">BURNS</button>
+    </div>
+  `;
+}
+
+function bleeding() {
+  showSteps(["Apply pressure","Elevate wound","Use bandage","Check circulation","Evacuate"]);
+}
+
+function burns() {
+  showSteps(["Cool with water","Remove tight items","Cover loosely","Avoid creams","Seek care"]);
+}
+
+function loadWater() {
+  showSteps(["Find source","Purify water","Store safely","Drink regularly"]);
+}
+
+function loadShelter() {
+  showSteps(["Find cover","Build structure","Insulate ground","Start fire"]);
+}
+
+function loadSecurity() {
+  showSteps(["Stay alert","Avoid danger","Move smart","Hide if needed"]);
+}
+
+function showSteps(steps) {
+  let html = '<div class="panel">';
+  steps.forEach((s, i) => {
+    html += `<div class="step">${i+1}. ${s}</div>`;
+  });
+  html += '</div>';
+  document.getElementById('main').innerHTML = html;
+}
+
+// Load default
+loadQuick();
+
+</script>
+
+</body>
+</html>
